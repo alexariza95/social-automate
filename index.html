@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Automation - Gestión de Contenido para Redes Sociales</title>
+    <style>
+        :root {
+            --color-primary: #00f2ea;
+            --color-dark: #010101;
+            --color-bg: #121212;
+            --color-surface: #1e1e1e;
+            --color-text: #ffffff;
+            --color-text-secondary: #a0a0a0;
+            --color-border: #2a2a2a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        .header {
+            background-color: var(--color-dark);
+            border-bottom: 1px solid var(--color-border);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-primary);
+        }
+
+        .hero {
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero .highlight {
+            color: var(--color-primary);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--color-text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .content-section {
+            padding: 4rem 0;
+        }
+
+        .content-section h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--color-primary);
+        }
+
+        .content-section h3 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-section p,
+        .content-section ul,
+        .content-section ol {
+            margin-bottom: 1.5rem;
+            color: var(--color-text-secondary);
+        }
+
+        .content-section ul,
+        .content-section ol {
+            padding-left: 2rem;
+        }
+
+        .content-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .content-section a {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        .content-section a:hover {
+            text-decoration: underline;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background-color: var(--color-surface);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--color-border);
+        }
+
+        .feature-card h3 {
+            color: var(--color-text);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: var(--color-text-secondary);
+        }
+
+        .footer {
+            background-color: var(--color-dark);
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 0;
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--color-text);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-primary);
+        }
+
+        .footer p {
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .page-content {
+            display: none;
+        }
+
+        .page-content.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="#home" class="logo" onclick="showPage('home')">SocialAutomate</a>
+                <ul class="nav-links">
+                    <li><a href="#home" onclick="showPage('home')">Inicio</a></li>
+                    <li><a href="#privacy" onclick="showPage('privacy')">Privacidad</a></li>
+                    <li><a href="#terms" onclick="showPage('terms')">Términos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- HOME PAGE -->
+        <div id="home" class="page-content active">
+            <section class="hero">
+                <div class="container">
+                    <h1>Automatiza tu contenido en <span class="highlight">redes sociales</span></h1>
+                    <p>Herramienta de automatización para gestionar y publicar contenido en múltiples plataformas de redes sociales de forma eficiente.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <div class="container">
+                    <h2>Características principales</h2>
+                    <div class="features">
+                        <div class="feature-card">
+                            <h3>📅 Programación automatizada</h3>
+                            <p>Programa tus publicaciones con antelación y deja que el sistema se encargue del resto.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>🎬 Gestión de vídeos</h3>
+                            <p>Procesa y adapta vídeos para diferentes formatos y plataformas automáticamente.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>🔗 Múltiples plataformas</h3>
+                            <p>Conecta con Instagram, Facebook, YouTube y más desde un solo lugar.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- PRIVACY POLICY PAGE -->
+        <div id="privacy" class="page-content">
+            <section class="content-section">
+                <div class="container">
+                    <h2>Política de Privacidad</h2>
+                    <p><strong>Última actualización: 11 de noviembre de 2025</strong></p>
+
+                    <h3>1. Información que recopilamos</h3>
+                    <p>Nuestra aplicación puede recopilar la siguiente información cuando utilizas nuestros servicios:</p>
+                    <ul>
+                        <li><strong>Información de cuenta:</strong> Nombre de usuario, dirección de correo electrónico y datos de autenticación de las plataformas de redes sociales que conectes.</li>
+                        <li><strong>Contenido:</strong> Vídeos, imágenes, texto y metadatos que proporciones para publicación.</li>
+                        <li><strong>Datos de uso:</strong> Información sobre cómo utilizas la aplicación, incluyendo registros de acceso y datos de interacción.</li>
+                        <li><strong>Datos de TikTok:</strong> Cuando conectas tu cuenta de TikTok, recopilamos: avatar, nombre para mostrar, correo electrónico, número de teléfono, recuentos de likes y seguidores, tipo de cuenta, información adicional del perfil (descripción bio), información de la pestaña de música y vídeos públicos del usuario de TikTok.</li>
+                    </ul>
+
+                    <h3>2. Cómo utilizamos tu información</h3>
+                    <p>Utilizamos la información recopilada para:</p>
+                    <ul>
+                        <li>Proporcionar y mantener nuestro servicio de automatización de publicaciones</li>
+                        <li>Procesar y programar el contenido que deseas publicar en redes sociales</li>
+                        <li>Autenticar y gestionar tu acceso a las plataformas conectadas</li>
+                        <li>Mejorar y optimizar nuestra aplicación</li>
+                        <li>Comunicarnos contigo sobre el servicio</li>
+                        <li>Cumplir con requisitos legales y regulatorios</li>
+                    </ul>
+
+                    <h3>3. Compartir información</h3>
+                    <p>No vendemos tu información personal. Compartimos tu información únicamente en estas circunstancias:</p>
+                    <ul>
+                        <li><strong>Con las plataformas de redes sociales:</strong> Compartimos el contenido que deseas publicar con las plataformas que hayas autorizado (TikTok, Instagram, Facebook, YouTube, etc.).</li>
+                        <li><strong>Proveedores de servicios:</strong> Podemos compartir datos con proveedores que nos ayudan a operar la aplicación (hosting, almacenamiento, procesamiento).</li>
+                        <li><strong>Cumplimiento legal:</strong> Si es requerido por ley o para proteger nuestros derechos legales.</li>
+                    </ul>
+
+                    <h3>4. Datos de TikTok</h3>
+                    <p>Cuando conectas tu cuenta de TikTok:</p>
+                    <ul>
+                        <li>Actuamos como controlador independiente de los datos que recopilamos</li>
+                        <li>Solo accedemos a datos públicos y aquellos para los que otorgas permiso explícito</li>
+                        <li>Nunca eliminamos mecanismos de copyright (como marcas de agua) sin tu consentimiento</li>
+                        <li>Protegemos tu identidad y anonimato según las políticas de TikTok</li>
+                        <li>No compartimos tu información personal identificable (PII) sin tu consentimiento</li>
+                        <li>Cumplimos con todas las leyes de protección de datos aplicables</li>
+                    </ul>
+
+                    <h3>5. Seguridad de los datos</h3>
+                    <p>Implementamos medidas de seguridad técnicas y organizativas para proteger tu información:</p>
+                    <ul>
+                        <li>Cifrado de datos en tránsito y en reposo</li>
+                        <li>Controles de acceso estrictos</li>
+                        <li>Auditorías de seguridad regulares</li>
+                        <li>Protección contra accesos no autorizados</li>
+                    </ul>
+
+                    <h3>6. Tus derechos</h3>
+                    <p>Tienes derecho a:</p>
+                    <ul>
+                        <li>Acceder a tu información personal</li>
+                        <li>Corregir datos inexactos</li>
+                        <li>Solicitar la eliminación de tus datos</li>
+                        <li>Retirar el consentimiento en cualquier momento</li>
+                        <li>Desconectar las plataformas de redes sociales vinculadas</li>
+                        <li>Exportar tus datos en formato legible</li>
+                    </ul>
+
+                    <h3>7. Retención de datos</h3>
+                    <p>Conservamos tu información personal solo durante el tiempo necesario para los fines descritos en esta política o según lo requiera la ley. Cuando solicites la eliminación de tu cuenta, eliminaremos tus datos personales dentro de 30 días, excepto cuando debamos conservarlos por obligaciones legales.</p>
+
+                    <h3>8. Menores de edad</h3>
+                    <p>Nuestro servicio no está dirigido a menores de 13 años. Si nos enteramos de que hemos recopilado información de un menor de 13 años, tomaremos medidas para eliminar esa información. En el caso de menores de 13 años, cumplimos con COPPA (Children's Online Privacy Protection Act) y obtenemos el consentimiento parental cuando sea necesario.</p>
+
+                    <h3>9. Consentimiento y opciones</h3>
+                    <p>Al utilizar nuestra aplicación:</p>
+                    <ul>
+                        <li>Proporcionamos mecanismos claros de consentimiento antes de acceder a tus datos</li>
+                        <li>Puedes retirar el consentimiento en cualquier momento desde la configuración de tu cuenta</li>
+                        <li>Respetamos tus preferencias de privacidad configuradas en cada plataforma de redes sociales</li>
+                        <li>Ofrecemos opciones de exclusión voluntaria para comunicaciones no esenciales</li>
+                    </ul>
+
+                    <h3>10. Transferencias internacionales</h3>
+                    <p>Tus datos pueden ser transferidos y procesados en países fuera de tu país de residencia. Aseguramos que dichas transferencias cumplan con las leyes aplicables de protección de datos, incluyendo GDPR y LGPD cuando sea aplicable.</p>
+
+                    <h3>11. Cookies y tecnologías similares</h3>
+                    <p>Utilizamos cookies y tecnologías similares para mejorar tu experiencia. Puedes controlar las cookies a través de la configuración de tu navegador. Para más información sobre TikTok Pixel y otras herramientas de seguimiento, consulta nuestras opciones de consentimiento.</p>
+
+                    <h3>12. Cambios en esta política</h3>
+                    <p>Podemos actualizar esta Política de Privacidad ocasionalmente. Te notificaremos sobre cambios significativos publicando la nueva política en esta página y actualizando la fecha de "Última actualización". Te recomendamos revisar esta política periódicamente.</p>
+
+                    <h3>13. Contacto</h3>
+                    <p>Si tienes preguntas sobre esta Política de Privacidad o deseas ejercer tus derechos, contáctanos en:</p>
+                    <p>Email: <a href="mailto:privacy@socialautomate.example.com">privacy@socialautomate.example.com</a></p>
+                </div>
+            </section>
+        </div>
+
+        <!-- TERMS OF SERVICE PAGE -->
+        <div id="terms" class="page-content">
+            <section class="content-section">
+                <div class="container">
+                    <h2>Términos y Condiciones de Servicio</h2>
+                    <p><strong>Última actualización: 11 de noviembre de 2025</strong></p>
+
+                    <h3>1. Aceptación de los términos</h3>
+                    <p>Al acceder y utilizar SocialAutomate ("el Servicio", "la Aplicación", "nosotros"), aceptas estar legalmente vinculado por estos Términos y Condiciones de Servicio. Si no estás de acuerdo con alguna parte de estos términos, no debes utilizar nuestro servicio.</p>
+
+                    <h3>2. Descripción del servicio</h3>
+                    <p>SocialAutomate es una herramienta de automatización que permite a los usuarios:</p>
+                    <ul>
+                        <li>Conectar y gestionar múltiples cuentas de redes sociales</li>
+                        <li>Programar publicaciones de contenido (texto, imágenes, vídeos)</li>
+                        <li>Procesar y adaptar contenido multimedia para diferentes plataformas</li>
+                        <li>Automatizar flujos de trabajo de publicación en redes sociales</li>
+                    </ul>
+
+                    <h3>3. Requisitos de elegibilidad</h3>
+                    <p>Para utilizar el Servicio, debes:</p>
+                    <ul>
+                        <li>Tener al menos 13 años de edad (o la edad mínima legal en tu jurisdicción)</li>
+                        <li>Tener la capacidad legal para celebrar un contrato vinculante</li>
+                        <li>Proporcionar información precisa y completa durante el registro</li>
+                        <li>Mantener la seguridad de tu cuenta y contraseña</li>
+                        <li>Cumplir con los términos de servicio de las plataformas de redes sociales que conectes</li>
+                    </ul>
+
+                    <h3>4. Uso aceptable</h3>
+                    <p>Al utilizar nuestro Servicio, te comprometes a:</p>
+                    <ul>
+                        <li>Utilizar el Servicio de manera legal y conforme a estos términos</li>
+                        <li>Respetar los derechos de propiedad intelectual de terceros</li>
+                        <li>No publicar contenido ilegal, difamatorio, obsceno o que incite al odio</li>
+                        <li>No utilizar el Servicio para spam, phishing o actividades fraudulentas</li>
+                        <li>No intentar acceder a sistemas o datos no autorizados</li>
+                        <li>Cumplir con las políticas y términos de cada plataforma de redes sociales</li>
+                        <li>No eliminar marcas de agua o mecanismos de copyright sin el consentimiento del creador</li>
+                    </ul>
+
+                    <h3>5. Conductas prohibidas</h3>
+                    <p>Está estrictamente prohibido:</p>
+                    <ul>
+                        <li>Realizar ingeniería inversa, descompilar o intentar extraer el código fuente del Servicio</li>
+                        <li>Utilizar bots, scrapers o herramientas automatizadas no autorizadas</li>
+                        <li>Sobrecargar intencionalmente nuestros sistemas</li>
+                        <li>Revender o redistribuir el Servicio sin autorización</li>
+                        <li>Hacerse pasar por otra persona o entidad</li>
+                        <li>Violar leyes de privacidad o protección de datos</li>
+                        <li>Compartir contenido que infrinja derechos de autor, marcas registradas u otros derechos de propiedad intelectual</li>
+                    </ul>
+
+                    <h3>6. Cuentas de usuario</h3>
+                    <p>Responsabilidades del usuario:</p>
+                    <ul>
+                        <li>Eres responsable de mantener la confidencialidad de tus credenciales de acceso</li>
+                        <li>Eres responsable de todas las actividades que ocurran bajo tu cuenta</li>
+                        <li>Debes notificarnos inmediatamente sobre cualquier uso no autorizado de tu cuenta</li>
+                        <li>Puedes cancelar tu cuenta en cualquier momento desde la configuración</li>
+                    </ul>
+
+                    <h3>7. Contenido del usuario</h3>
+                    <p>Propiedad y licencia:</p>
+                    <ul>
+                        <li>Conservas todos los derechos de propiedad sobre el contenido que publicas</li>
+                        <li>Al usar el Servicio, nos otorgas una licencia limitada para procesar, almacenar y publicar tu contenido según tus instrucciones</li>
+                        <li>Eres el único responsable del contenido que publicas y de sus consecuencias</li>
+                        <li>Nos reservamos el derecho de eliminar contenido que viole estos términos o las leyes aplicables</li>
+                    </ul>
+
+                    <h3>8. Integración con plataformas de terceros</h3>
+                    <p>Nuestro Servicio se integra con plataformas de redes sociales de terceros (TikTok, Instagram, Facebook, YouTube, etc.):</p>
+                    <ul>
+                        <li>El uso de estas integraciones está sujeto a sus respectivos términos de servicio</li>
+                        <li>No somos responsables de cambios, interrupciones o terminación de APIs de terceros</li>
+                        <li>Las limitaciones de las plataformas de terceros (límites de velocidad, restricciones de contenido) se aplican</li>
+                        <li>Debes mantener el cumplimiento de las políticas de cada plataforma</li>
+                    </ul>
+
+                    <h3>9. Propiedad intelectual</h3>
+                    <p>Derechos de SocialAutomate:</p>
+                    <ul>
+                        <li>Todos los derechos, títulos e intereses en el Servicio y su tecnología subyacente son propiedad de SocialAutomate</li>
+                        <li>Nuestras marcas, logotipos y diseño visual están protegidos por derechos de propiedad intelectual</li>
+                        <li>Esta licencia no te otorga ningún derecho de propiedad sobre el Servicio</li>
+                    </ul>
+
+                    <h3>10. Tarifas y pagos</h3>
+                    <p>Planes y facturación:</p>
+                    <ul>
+                        <li>Ofrecemos planes gratuitos y de pago con diferentes características</li>
+                        <li>Las tarifas se cobran por adelantado según el plan seleccionado</li>
+                        <li>Los pagos no son reembolsables, excepto cuando lo requiera la ley</li>
+                        <li>Nos reservamos el derecho de modificar las tarifas con notificación previa</li>
+                        <li>El impago puede resultar en la suspensión o cancelación del servicio</li>
+                    </ul>
+
+                    <h3>11. Suspensión y cancelación</h3>
+                    <p>Podemos suspender o cancelar tu acceso al Servicio:</p>
+                    <ul>
+                        <li>Si violas estos Términos y Condiciones</li>
+                        <li>Si tu uso representa un riesgo de seguridad o legal</li>
+                        <li>Si no pagas las tarifas aplicables</li>
+                        <li>Por solicitud de autoridades legales</li>
+                    </ul>
+                    <p>Tú puedes cancelar tu cuenta en cualquier momento. Tras la cancelación, eliminaremos tus datos personales según nuestra Política de Privacidad, pero podemos conservar cierta información por obligaciones legales.</p>
+
+                    <h3>12. Exclusión de garantías</h3>
+                    <p>El Servicio se proporciona "TAL CUAL" y "SEGÚN DISPONIBILIDAD":</p>
+                    <ul>
+                        <li>No garantizamos que el Servicio sea ininterrumpido, libre de errores o seguro</li>
+                        <li>No garantizamos resultados específicos del uso del Servicio</li>
+                        <li>No somos responsables de la disponibilidad o funcionamiento de APIs de terceros</li>
+                        <li>Excluimos todas las garantías implícitas en la medida permitida por la ley</li>
+                    </ul>
+
+                    <h3>13. Limitación de responsabilidad</h3>
+                    <p>En la máxima medida permitida por la ley:</p>
+                    <ul>
+                        <li>No seremos responsables de daños indirectos, incidentales, especiales o consecuentes</li>
+                        <li>Nuestra responsabilidad total no excederá la cantidad que hayas pagado por el Servicio en los últimos 12 meses</li>
+                        <li>No somos responsables de pérdida de datos, beneficios o interrupciones comerciales</li>
+                        <li>No somos responsables de acciones tomadas por plataformas de terceros (suspensiones de cuenta, eliminación de contenido, etc.)</li>
+                    </ul>
+
+                    <h3>14. Indemnización</h3>
+                    <p>Aceptas indemnizarnos y mantenernos indemnes de cualquier reclamo, pérdida, responsabilidad, daño, costo y gasto (incluyendo honorarios legales) que surjan de:</p>
+                    <ul>
+                        <li>Tu uso del Servicio</li>
+                        <li>Tu violación de estos términos</li>
+                        <li>Tu violación de derechos de terceros, incluyendo derechos de propiedad intelectual</li>
+                        <li>Cualquier contenido que publiques a través del Servicio</li>
+                    </ul>
+
+                    <h3>15. Modificaciones del servicio</h3>
+                    <p>Nos reservamos el derecho de:</p>
+                    <ul>
+                        <li>Modificar, suspender o descontinuar cualquier aspecto del Servicio en cualquier momento</li>
+                        <li>Actualizar características, límites de uso o estructura de precios</li>
+                        <li>Realizar mantenimiento programado o no programado</li>
+                    </ul>
+                    <p>Haremos esfuerzos razonables para notificarte sobre cambios significativos con antelación.</p>
+
+                    <h3>16. Cambios en estos términos</h3>
+                    <p>Podemos actualizar estos Términos y Condiciones ocasionalmente. Te notificaremos sobre cambios materiales mediante:</p>
+                    <ul>
+                        <li>Publicación en esta página con fecha actualizada</li>
+                        <li>Notificación por correo electrónico (para cambios significativos)</li>
+                        <li>Notificación dentro de la aplicación</li>
+                    </ul>
+                    <p>Tu uso continuado del Servicio después de los cambios constituye tu aceptación de los nuevos términos.</p>
+
+                    <h3>17. Resolución de disputas</h3>
+                    <p>Ley aplicable y jurisdicción:</p>
+                    <ul>
+                        <li>Estos términos se rigen por las leyes de España</li>
+                        <li>Cualquier disputa se resolverá en los tribunales de Córdoba, España</li>
+                        <li>Intentaremos resolver disputas de buena fe antes de proceder legalmente</li>
+                    </ul>
+
+                    <h3>18. Disposiciones generales</h3>
+                    <p>Cláusulas adicionales:</p>
+                    <ul>
+                        <li><strong>Divisibilidad:</strong> Si alguna disposición es inválida, las demás permanecen en vigor</li>
+                        <li><strong>Acuerdo completo:</strong> Estos términos constituyen el acuerdo completo entre tú y SocialAutomate</li>
+                        <li><strong>Renuncia:</strong> Nuestra falta de ejercicio de un derecho no constituye renuncia al mismo</li>
+                        <li><strong>Cesión:</strong> No puedes ceder estos términos sin nuestro consentimiento previo</li>
+                        <li><strong>Notificaciones:</strong> Las notificaciones se enviarán a la dirección de correo electrónico registrada</li>
+                    </ul>
+
+                    <h3>19. Contacto</h3>
+                    <p>Si tienes preguntas sobre estos Términos y Condiciones, contáctanos en:</p>
+                    <p>Email: <a href="mailto:legal@socialautomate.example.com">legal@socialautomate.example.com</a></p>
+                    <p>Dirección: Córdoba, Andalucía, España</p>
+
+                    <h3>20. Reconocimiento</h3>
+                    <p>Al utilizar el Servicio, reconoces que has leído, comprendido y aceptado estos Términos y Condiciones de Servicio, así como nuestra Política de Privacidad.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <ul class="footer-links">
+                <li><a href="#home" onclick="showPage('home')">Inicio</a></li>
+                <li><a href="#privacy" onclick="showPage('privacy')">Política de Privacidad</a></li>
+                <li><a href="#terms" onclick="showPage('terms')">Términos de Servicio</a></li>
+            </ul>
+            <p>&copy; 2025 SocialAutomate. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            const selectedPage = document.getElementById(pageId);
+            if (selectedPage) {
+                selectedPage.classList.add('active');
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            if (window.location.hash) {
+                history.pushState(null, null, '#' + pageId);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.slice(1);
+            if (hash && ['home', 'privacy', 'terms'].includes(hash)) {
+                showPage(hash);
+            }
+        });
+    </script>
+</body>
+</html>
